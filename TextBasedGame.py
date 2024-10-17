@@ -12,9 +12,15 @@ def instructions():
     print("Directions:\n"
     "To move rooms, type 'go [direction]' (eg. go North, go East..).\n"
     "To add an item to your inventory, type 'get [item name]'.\n"
-    "To exit game, type Exit.\n"
+    #"To exit game, type Exit.\n"
     "To get help, type Help.\n"
     "--------------------")
+
+def status(room, items):
+    #FIXME add if statement for grammar
+    print("\nYou are in {}.".format(room))
+    print("Inventory: {}".format(items))
+    print("--------------------")
 
 def main():
     rooms = {
@@ -29,11 +35,18 @@ def main():
                            'South': 'Town Hall', 'item': 'Cursed Mask'},
         "Pumpkin Patch": {'East': 'Cemetery', 'North': 'Town Hall', 'item': 'Glowing Pumpkin'},
         "Sally's Sewing Room": {'East': 'Town Hall', 'North': "Dr. Finkelstein's Lab", 'item': 'Magic Thread'}
-
     }
+
+    currentRoom = "Town Hall"
+    inventory = []
 
     intro()
     instructions()
+
+    while currentRoom != "Boogie's Lair":
+        status(currentRoom, inventory)
+        move = input("Enter your move: ").title().strip()
+
 
 
 main()
