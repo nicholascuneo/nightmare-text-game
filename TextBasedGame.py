@@ -47,6 +47,20 @@ def main():
         status(currentRoom, inventory)
         move = input("Enter your move: ").title().strip()
 
+        if move == 'Help':
+            intro()
+
+        elif move.startswith('Go'):
+            parts = move.split()
+            if len(parts) > 1:
+                direction = parts[1]
+                if direction in rooms[currentRoom]:
+                    currentRoom = rooms[currentRoom][direction]
+                else:
+                    print("\n*** You can't go that way! ***")
+            else:
+                print("\n*** Please specify direction. ***")
+
 
 
 main()
