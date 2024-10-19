@@ -39,7 +39,7 @@ def main():
         "Boogie's Lair": {'South': "Boogie's Trap Room", 'item': 'Oogie Boogie'},
         "Cemetery": {'West': 'Pumpkin Patch', 'item': 'Nightshade'},
         "Dr. Finkelstein's Lab": {'South': "Sally's Sewing Room", 'East': "Mayor's Office", 'item': 'Scalpel'},
-        "Lock, Shock, and Barrel's Treehouse": {'West': "Mayor's Office", 'item': 'Trick-or-Treat bag'},
+        "Lock, Shock, and Barrel's Treehouse": {'West': "Mayor's Office", 'item': 'Trick Or Treat Bag'},
         "Mayor's Office": {'East': "Lock, Shock, and Barrel's Treehouse", 'West': "Dr. Finkelstein's Lab",
                            'South': 'Town Hall', 'item': 'Cursed Mask'},
         "Pumpkin Patch": {'East': 'Cemetery', 'North': 'Town Hall', 'item': 'Glowing Pumpkin'},
