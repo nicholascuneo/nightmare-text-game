@@ -1,10 +1,10 @@
 # Define function to share story with user
 def intro():
-    print("\nTITLE")
+    print("\nOOGIE BOOGIE's REVENGE")
     print("--------------------")
     print("Oogie Boogie is up to his old tricks again, planning to turn the holidays upside down.\n"
           "As Jack Skellington, you must stop him before Christmas is ruined. With the help of your\n"
-          "loyal dog, Zero, you'll need to gather 6 items scattered across Halloween Town to help you\n"
+          "loyal dog, Zero, you'll need to gather 7 items scattered across Halloween Town to help you\n"
           "in your final battle with Boogie. Should you enter Boogie's Lair before collecting all items,\n"
           "Boogie will get the best of you and Christmas will be ruined!\n"
           "--------------------\n")
@@ -23,12 +23,17 @@ def status(room, items, dict_rooms):
     # List of rooms to determine proper grammar of status statement
     rooms_grammar = ["Town Hall", "Cemetery", "Mayor's Office", "Pumpkin Patch"]
 
+    # Output current room
     if room in rooms_grammar:
         print("\nYou are in the {}.".format(room))
     else:
         print("\nYou are in {}.".format(room))
 
-    print("Inventory: {}".format(items)) # Player's inventory
+    # Output player inventory
+    if len(items) == 1: # Account for singular item
+        print("Inventory ({} item): {}".format(len(items), items)) # Player's inventory
+    else:
+        print("Inventory ({} items): {}".format(len(items), items))
 
     if dict_rooms[room].get('item') is not None: # Check if current room has an 'item' key
         print("\nYou see a {}".format(dict_rooms[room].get('item'))) # If item exists in room, output to player
@@ -123,8 +128,3 @@ def main():
 
 
 main()
-
-
-
-
-
