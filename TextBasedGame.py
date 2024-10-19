@@ -14,8 +14,8 @@ def instructions():
     print("Directions:\n"
     "To move rooms, type 'go [direction]' (eg. go North, go East..).\n"
     "To add an item to your inventory, type 'get [item name]'.\n"
-    #"To exit game, type Exit.\n"
     "To get help, type Help.\n"
+    "To quit game, type Quit.\n"
     "--------------------")
 
 # Define function to show status of player
@@ -62,6 +62,16 @@ def main():
         if move == 'Help': # Print instructions if 'help' is input as player move
             instructions()
 
+        elif move == 'Quit':
+            user_quit = input("Are you sure? (y/n): ").lower().strip() # Confirm if player wants to quit
+            if user_quit == 'y':
+                print("\nThank you for playing. Goodbye!")
+                break # Exit main loop and end game
+            elif user_quit == 'n':
+                print("\nContinuing your quest...") # Continue game loop
+            else:
+                print("\nInvalid response. Please type 'y' for yes or 'n' for no.") # Handles invalid command
+
         # Check if move starts with 'Go' which indicates move to another room
         elif move.startswith('Go'):
             parts = move.split() # Parse valid directional move command into list
@@ -88,6 +98,8 @@ def main():
                     print("*** There is no {} here! ***".format(item)) # Output if item does not exist in current room
             else:
                 print("*** Please specify item. ***") # Handles case if player only inputs 'Get'
+
+
 
 
 main()
