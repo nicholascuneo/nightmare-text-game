@@ -1,3 +1,4 @@
+# Define function to share story with user
 def intro():
     print("\nTITLE")
     print("--------------------")
@@ -8,6 +9,7 @@ def intro():
           "Boogie will get the best of you and Christmas will be ruined!\n"
           "--------------------\n")
 
+# Function to print the move instructions
 def instructions():
     print("Directions:\n"
     "To move rooms, type 'go [direction]' (eg. go North, go East..).\n"
@@ -16,13 +18,20 @@ def instructions():
     "To get help, type Help.\n"
     "--------------------")
 
-def status(room, items):
+# Define function to show status of player
+def status(room, items, dict_rooms):
     #FIXME add if statement for grammar
-    print("\nYou are in {}.".format(room))
-    print("Inventory: {}".format(items))
+    print("\nYou are in {}.".format(room)) # Current room
+    print("Inventory: {}".format(items)) # Player's inventory
+
+    if dict_rooms[room].get('item') is not None: # Check if current room has an 'item' key
+        print("\nYou see a {}".format(dict_rooms[room].get('item'))) # If item exists in room, output to player
+
     print("--------------------")
 
+# Main game function
 def main():
+    # Set dictionary of rooms, directions, and items
     rooms = {
         "Town Hall": {'North': "Mayor's Office", 'South': 'Pumpkin Patch', 'West': "Sally's Sewing Room",
                       'East': "Boogie's Trap Room"},
@@ -37,33 +46,52 @@ def main():
         "Sally's Sewing Room": {'East': 'Town Hall', 'North': "Dr. Finkelstein's Lab", 'item': 'Magic Thread'}
     }
 
+    # Set player in starting room and initiate player inventory list
     currentRoom = "Town Hall"
     inventory = []
 
+    # Call intro and instruction functions
     intro()
     instructions()
 
+    # Main game loop
     while currentRoom != "Boogie's Lair":
-        status(currentRoom, inventory)
-        move = input("Enter your move: ").title().strip()
+        status(currentRoom, inventory, rooms) # Call status function
+        move = input("Enter your move: ").title().strip() # Get move command from user
 
-        if move == 'Help':
-            intro()
+        if move == 'Help': # Print instructions if 'help' is input as player move
+            instructions()
 
+        # Check if move starts with 'Go' which indicates move to another room
         elif move.startswith('Go'):
-            parts = move.split()
-            if len(parts) > 1:
-                direction = parts[1]
-                if direction in rooms[currentRoom]:
-                    currentRoom = rooms[currentRoom][direction]
+            parts = move.split() # Parse valid directional move command into list
+            if len(parts) > 1: # Ensures direction is provided in command
+                direction = parts[1] # Direction assigned to variable
+                if direction in rooms[currentRoom]: # Checks if direction matches key in current room nested dictionary
+                    currentRoom = rooms[currentRoom][direction] # Move player to new room
                 else:
-                    print("\n*** You can't go that way! ***")
+                    print("\n*** You can't go that way! ***") # Output if direction is not available for current room
             else:
-                print("\n*** Please specify direction. ***")
+                print("\n*** Please specify direction. ***") # Handles case if player only inputs 'Go'
 
+        # Check if move starts with 'Get' indicating taking an item from room
+        elif move.startswith('Get'):
+            parts = move.split() # Parse item after 'Get' into list
+            if len(parts) > 1: # Ensures item is provided in command
+                item = ' '.join(parts[1:])  # Join everything after 'Get' for multi-word items
+
+                # Check if 'item' key exists in current room and if it matches item provided in player command
+                if 'item' in rooms[currentRoom] and rooms[currentRoom]['item'] == item:
+                    inventory.append(rooms[currentRoom].pop('item')) # Remove item from rooms dict and add to inventory
+                    print("You grabbed the {}!".format(item)) # Output when addition to inventory is successful
+                else:
+                    print("*** There is no {} here! ***".format(item)) # Output if item does not exist in current room
+            else:
+                print("*** Please specify item. ***") # Handles case if player only inputs 'Get'
 
 
 main()
+
 
 
 
