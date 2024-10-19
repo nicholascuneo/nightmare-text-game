@@ -93,12 +93,23 @@ def main():
                 # Check if 'item' key exists in current room and if it matches item provided in player command
                 if 'item' in rooms[currentRoom] and rooms[currentRoom]['item'] == item:
                     inventory.append(rooms[currentRoom].pop('item')) # Remove item from rooms dict and add to inventory
-                    print("You grabbed the {}!".format(item)) # Output when addition to inventory is successful
+                    print("\nYou grabbed the {}!".format(item)) # Output when addition to inventory is successful
                 else:
-                    print("*** There is no {} here! ***".format(item)) # Output if item does not exist in current room
+                    print("\n*** There is no {} here! ***".format(item)) # Output if item does not exist in current room
             else:
-                print("*** Please specify item. ***") # Handles case if player only inputs 'Get'
+                print("\n*** Please specify item. ***") # Handles case if player only inputs 'Get'
 
+    if currentRoom == "Boogie's Lair":
+        if len(inventory) < 7:
+            print("\n Oh no, Jack Skellington...")
+            print("You stumbled into Boogie's Lair without all the items!")
+            print("Oogie Boogie towers over you and casts you into a pit of bugs!")
+            print("Christmas is ruined. Goodbye.")
+        else:
+            print("\n Congratulations, Jack Skellington!")
+            print("You have all the necessary items, and with Zero's help, you defeat Oogie Boogie!")
+            print("Christmas is saved! Santa can finally make his deliveries, and all is merry in Halloween Town.")
+            print("You are the Pumpkin King!")
 
 
 
