@@ -20,8 +20,14 @@ def instructions():
 
 # Define function to show status of player
 def status(room, items, dict_rooms):
-    #FIXME add if statement for grammar
-    print("\nYou are in {}.".format(room)) # Current room
+    # List of rooms to determine proper grammar of status statement
+    rooms_grammar = ["Town Hall", "Cemetery", "Mayor's Office", "Pumpkin Patch"]
+
+    if room in rooms_grammar:
+        print("\nYou are in the {}.".format(room))
+    else:
+        print("\nYou are in {}.".format(room))
+
     print("Inventory: {}".format(items)) # Player's inventory
 
     if dict_rooms[room].get('item') is not None: # Check if current room has an 'item' key
@@ -99,8 +105,8 @@ def main():
             else:
                 print("\n*** Please specify item. ***") # Handles case if player only inputs 'Get'
 
-        else: # Handles is player inputs invalid command
-            print("*** Invalid command ***")
+        else: # Handles if player inputs invalid command
+            print("\n*** Invalid command ***")
 
     # Win or lose scenarios and outputs when player enters Boogie's Lair
     if currentRoom == "Boogie's Lair":
