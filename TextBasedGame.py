@@ -99,18 +99,21 @@ def main():
             else:
                 print("\n*** Please specify item. ***") # Handles case if player only inputs 'Get'
 
+        else: # Handles is player inputs invalid command
+            print("*** Invalid command ***")
+
+    # Win or lose scenarios and outputs when player enters Boogie's Lair
     if currentRoom == "Boogie's Lair":
-        if len(inventory) < 7:
-            print("\n Oh no, Jack Skellington...")
+        if len(inventory) < 7: # Player has not collected all items
+            print("\nOh no, Jack Skellington...")
             print("You stumbled into Boogie's Lair without all the items!")
             print("Oogie Boogie towers over you and casts you into a pit of bugs!")
             print("Christmas is ruined. Goodbye.")
-        else:
-            print("\n Congratulations, Jack Skellington!")
+        else: # Player collects all items and wins game
+            print("\nCongratulations, Jack Skellington!")
             print("You have all the necessary items, and with Zero's help, you defeat Oogie Boogie!")
             print("Christmas is saved! Santa can finally make his deliveries, and all is merry in Halloween Town.")
             print("You are the Pumpkin King!")
-
 
 
 main()
