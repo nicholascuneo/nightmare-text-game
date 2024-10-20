@@ -1,13 +1,13 @@
 # Define function to share story with user
 def intro():
-    print("\nOOGIE BOOGIE's REVENGE")
-    print("--------------------")
-    print("Oogie Boogie is up to his old tricks again, planning to turn the holidays upside down.\n"
-          "As Jack Skellington, you must stop him before Christmas is ruined. With the help of your\n"
-          "loyal dog, Zero, you'll need to gather 7 items scattered across Halloween Town to help you\n"
-          "in your final battle with Boogie. Should you enter Boogie's Lair before collecting all items,\n"
-          "Boogie will get the best of you and Christmas will be ruined!\n"
-          "--------------------")
+    print("\nOOGIE BOOGIE's REVENGE\n"
+    "--------------------\n"
+    "Oogie Boogie is up to his old tricks again, planning to turn the holidays upside down.\n"
+    "As Jack Skellington, you must stop him before Christmas is ruined. With the help of your\n"
+    "loyal dog, Zero, you'll need to gather 7 items scattered across Halloween Town to help you\n"
+    "in your final battle with Boogie. Should you enter Boogie's Lair before collecting all items,\n"
+    "Boogie will get the best of you and Christmas will be ruined!\n"
+    "--------------------")
 
 # Function to print the move instructions
 def show_instructions():
@@ -31,18 +31,19 @@ def show_status(room, items, dict_rooms):
     else:
         print("\nYou are in {}.".format(room))
 
+    # Check if current room has an 'item' key
+    if dict_rooms[room].get('item') is not None:
+        print("\nYou see a {}".format(dict_rooms[room].get('item'))) # If item exists in room, output to player
+
     # Output player inventory
     if len(items) == 1: # Account for singular item
         print("Inventory ({} item): {}".format(len(items), items)) # Player's inventory
     else:
         print("Inventory ({} items): {}".format(len(items), items))
 
-    if dict_rooms[room].get('item') is not None: # Check if current room has an 'item' key
-        print("\nYou see a {}".format(dict_rooms[room].get('item'))) # If item exists in room, output to player
-
     print("--------------------")
-
     move = input("Enter your move: ").title().strip()  # Get move command from player
+
     return move # Return the move command from player
 
 # Main game function
