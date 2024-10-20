@@ -7,11 +7,13 @@ def intro():
           "loyal dog, Zero, you'll need to gather 7 items scattered across Halloween Town to help you\n"
           "in your final battle with Boogie. Should you enter Boogie's Lair before collecting all items,\n"
           "Boogie will get the best of you and Christmas will be ruined!\n"
-          "--------------------\n")
+          "--------------------")
 
 # Function to print the move instructions
-def instructions():
-    print("Directions:\n"
+def show_instructions():
+    print("\nDirections:\n"
+    "--------------------\n"
+    "Collect all 7 items before facing Boogie.\n"
     "To move rooms, type 'go [direction]' (eg. go North, go East..).\n"
     "To add an item to your inventory, type 'get [item name]'.\n"
     "To get help, type Help.\n"
@@ -19,7 +21,7 @@ def instructions():
     "--------------------")
 
 # Define function to show status of player
-def status(room, items, dict_rooms):
+def show_status(room, items, dict_rooms):
     # List of rooms to determine proper grammar of status statement
     rooms_grammar = ["Town Hall", "Cemetery", "Mayor's Office", "Pumpkin Patch"]
 
@@ -39,6 +41,9 @@ def status(room, items, dict_rooms):
         print("\nYou see a {}".format(dict_rooms[room].get('item'))) # If item exists in room, output to player
 
     print("--------------------")
+
+    move = input("Enter your move: ").title().strip()  # Get move command from player
+    return move # Return the move command from player
 
 # Main game function
 def main():
@@ -63,15 +68,14 @@ def main():
 
     # Call intro and instruction functions
     intro()
-    instructions()
+    show_instructions()
 
     # Main game loop
     while currentRoom != "Boogie's Lair":
-        status(currentRoom, inventory, rooms) # Call status function
-        move = input("Enter your move: ").title().strip() # Get move command from user
+        move = show_status(currentRoom, inventory, rooms) # Capture returned move from calling show status function
 
         if move == 'Help': # Print instructions if 'help' is input as player move
-            instructions()
+            show_instructions()
 
         elif move == 'Quit':
             user_quit = input("Are you sure? (y/n): ").lower().strip() # Confirm if player wants to quit
