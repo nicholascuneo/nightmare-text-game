@@ -96,9 +96,17 @@ def main():
                 if direction in rooms[currentRoom]: # Checks if direction matches key in current room nested dictionary
                     currentRoom = rooms[currentRoom][direction] # Move player to new room
                 else:
-                    print("\n*** You can't go that way! ***") # Output if direction is not available for current room
+                    cardinal_directions = ["North", "South", "East", "West"] # List of valid cardinal directions
+
+                    if direction not in cardinal_directions: # Check if input direction is valid to determine output
+                        print("\n*** Be sure to enter a cardinal direction. ***") # Output if direction is invalid
+                    else:
+                        print("\n*** You can't go that way! ***") # Output if direction not available for current room
             else:
-                print("\n*** Please specify direction. ***") # Handles case if player only inputs 'Go'
+                if len(parts[0]) > 2: # Checks if player entered 'Go' + 'direction' without a space
+                    print("\n*** Invalid command ***")
+                else:
+                    print("\n*** Please specify direction. ***") # Handles case if player only inputs 'Go'
 
         # Check if move starts with 'Get' indicating taking an item from room
         elif move.startswith('Get'):
@@ -113,7 +121,10 @@ def main():
                 else:
                     print("\n*** There is no {} here! ***".format(item)) # Output if item does not exist in current room
             else:
-                print("\n*** Please specify item. ***") # Handles case if player only inputs 'Get'
+                if len(parts[0]) > 3: # Checks if player input 'get' + 'item' without a space
+                    print("\n*** Invalid command ***")
+                else:
+                    print("\n*** Please specify item. ***") # Handles case if player only inputs 'Get'
 
         else: # Handles if player inputs invalid command
             print("\n*** Invalid command ***")
