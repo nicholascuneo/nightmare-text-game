@@ -1,24 +1,24 @@
 # Define function to share story with user
 def intro():
     print("\nOOGIE BOOGIE's REVENGE\n"
-    "--------------------\n"
-    "Oogie Boogie is up to his old tricks again, planning to turn the holidays upside down.\n"
-    "As Jack Skellington, you must stop him before Christmas is ruined. With the help of your\n"
-    "loyal dog, Zero, you'll need to gather 7 items scattered across Halloween Town to help you\n"
-    "in your final battle with Boogie. Should you enter Boogie's Lair before collecting all items,\n"
-    "Boogie will get the best of you and Christmas will be ruined!\n"
-    "--------------------")
+          "--------------------\n"
+          "Oogie Boogie is up to his old tricks again, planning to turn the holidays upside down.\n"
+          "As Jack Skellington, you must stop him before Christmas is ruined. With the help of your\n"
+          "loyal dog, Zero, you'll need to gather 7 items scattered across Halloween Town to help you\n"
+          "in your final battle with Boogie. Should you enter Boogie's Lair before collecting all items,\n"
+          "Boogie will get the best of you and Christmas will be ruined!\n"
+          "--------------------")
 
 # Function to print the move instructions
 def show_instructions():
     print("\nDirections:\n"
-    "--------------------\n"
-    "Collect all 7 items before facing Boogie.\n"
-    "To move rooms, type 'go [direction]' (eg. go North, go East..).\n"
-    "To add an item to your inventory, type 'get [item name]'.\n"
-    "To get help, type Help.\n"
-    "To quit game, type Quit.\n"
-    "--------------------")
+          "--------------------\n"
+          "Collect all 7 items before facing Boogie.\n"
+          "To move rooms, type 'go [direction]' (eg. go North, go East..).\n"
+          "To add an item to your inventory, type 'get [item name]'.\n"
+          "To get help, type Help.\n"
+          "To quit game, type Quit.\n"
+          "--------------------")
 
 # Define function to show status of player
 def show_status(room, items, dict_rooms):
@@ -50,21 +50,54 @@ def show_status(room, items, dict_rooms):
 def main():
     # Set dictionary of rooms, directions, and items
     rooms = {
-        "Town Hall": {'North': "Mayor's Office", 'South': 'Pumpkin Patch', 'West': "Sally's Sewing Room",
-                      'East': "Boogie's Trap Room"},
-        "Boogie's Trap Room": {'North': "Boogie's Lair", 'West': 'Town Hall', 'item': 'Lucky Dice'},
-        "Boogie's Lair": {'South': "Boogie's Trap Room", 'item': 'Oogie Boogie'},
-        "Cemetery": {'West': 'Pumpkin Patch', 'item': 'Nightshade'},
-        "Dr. Finkelstein's Lab": {'South': "Sally's Sewing Room", 'East': "Mayor's Office", 'item': 'Scalpel'},
-        "Lock, Shock, and Barrel's Treehouse": {'West': "Mayor's Office", 'item': 'Trick Or Treat Bag'},
-        "Mayor's Office": {'East': "Lock, Shock, and Barrel's Treehouse", 'West': "Dr. Finkelstein's Lab",
-                           'South': 'Town Hall', 'item': 'Cursed Mask'},
-        "Pumpkin Patch": {'East': 'Cemetery', 'North': 'Town Hall', 'item': 'Glowing Pumpkin'},
-        "Sally's Sewing Room": {'East': 'Town Hall', 'North': "Dr. Finkelstein's Lab", 'item': 'Magic Thread'}
+        "Town Hall": {
+            "North": "Mayor's Office",
+            "South": "Pumpkin Patch",
+            "West": "Sally's Sewing Room",
+            "East": "Boogie's Trap Room"
+        },
+        "Boogie's Trap Room": {
+            "North": "Boogie's Lair",
+            "West": "Town Hall",
+            "item": "Lucky Dice"
+        },
+        "Boogie's Lair": {
+            "South": "Boogie's Trap Room",
+            "item": "Oogie Boogie"
+        },
+        "Cemetery": {
+            "West": "Pumpkin Patch",
+            "item": "Nightshade"
+        },
+        "Dr. Finkelstein's Lab": {
+            "South": "Sally's Sewing Room",
+            "East": "Mayor's Office",
+            "item": "Scalpel"
+        },
+        "Lock, Shock, and Barrel's Treehouse": {
+            "West": "Mayor's Office",
+            "item": "Trick Or Treat Bag"
+        },
+        "Mayor's Office": {
+            "East": "Lock, Shock, and Barrel's Treehouse",
+            "West": "Dr. Finkelstein's Lab",
+            "South": "Town Hall",
+            "item": "Cursed Mask"
+        },
+        "Pumpkin Patch": {
+            "East": "Cemetery",
+            "North": "Town Hall",
+            "item": "Glowing Pumpkin"
+        },
+        "Sally's Sewing Room": {
+            "East": "Town Hall",
+            "North": "Dr. Finkelstein's Lab",
+            "item": "Magic Thread"
+        }
     }
 
-    # Set player in starting room and initiate player inventory list
-    currentRoom = "Town Hall"
+    # Set player in starting room and initialize player inventory list
+    current_room = "Town Hall"
     inventory = []
 
     # Call intro and instruction functions
@@ -72,8 +105,8 @@ def main():
     show_instructions()
 
     # Main game loop
-    while currentRoom != "Boogie's Lair":
-        move = show_status(currentRoom, inventory, rooms) # Capture returned move from calling show status function
+    while current_room != "Boogie's Lair":
+        move = show_status(current_room, inventory, rooms) # Capture returned move from calling show status function
 
         if move == 'Help': # Print instructions if 'help' is input as player move
             show_instructions()
@@ -93,8 +126,8 @@ def main():
             parts = move.split() # Parse valid directional move command into list
             if len(parts) > 1: # Ensures direction is provided in command
                 direction = parts[1] # Direction assigned to variable
-                if direction in rooms[currentRoom]: # Checks if direction matches key in current room nested dictionary
-                    currentRoom = rooms[currentRoom][direction] # Move player to new room
+                if direction in rooms[current_room]: # Checks if direction matches key in current room nested dictionary
+                    current_room = rooms[current_room][direction] # Move player to new room
                 else:
                     cardinal_directions = ["North", "South", "East", "West"] # List of valid cardinal directions
 
@@ -115,8 +148,8 @@ def main():
                 item = ' '.join(parts[1:])  # Join everything after 'Get' for multi-word items
 
                 # Check if 'item' key exists in current room and if it matches item provided in player command
-                if 'item' in rooms[currentRoom] and rooms[currentRoom]['item'] == item:
-                    inventory.append(rooms[currentRoom].pop('item')) # Remove item from rooms dict and add to inventory
+                if 'item' in rooms[current_room] and rooms[current_room]['item'] == item:
+                    inventory.append(rooms[current_room].pop('item')) # Remove item from rooms dict and add to inventory
                     print("\nYou grabbed the {}!".format(item)) # Output when addition to inventory is successful
                 else:
                     print("\n*** There is no {} here! ***".format(item)) # Output if item does not exist in current room
@@ -130,17 +163,17 @@ def main():
             print("\n*** Invalid command ***")
 
     # Win or lose scenarios and outputs when player enters Boogie's Lair
-    if currentRoom == "Boogie's Lair":
+    if current_room == "Boogie's Lair":
         if len(inventory) < 7: # Player has not collected all items
-            print("\nOh no, Jack Skellington...")
-            print("You stumbled into Boogie's Lair without all the items!")
-            print("Oogie Boogie towers over you and casts you into a pit of bugs!")
-            print("Christmas is ruined. Goodbye.")
+            print("\nOh no, Jack Skellington...\n"
+                  "You stumbled into Boogie's Lair without all the items!\n"
+                  "Oogie Boogie towers over you and casts you into a pit of bugs!\n"
+                  "Christmas is ruined. Goodbye.")
         else: # Player collects all items and wins game
-            print("\nCongratulations, Jack Skellington!")
-            print("You have all the necessary items, and with Zero's help, you defeat Oogie Boogie!")
-            print("Christmas is saved! Santa can finally make his deliveries, and all is merry in Halloween Town.")
-            print("You are the Pumpkin King!")
+            print("\nCongratulations, Jack Skellington!\n"
+                  "You have all the necessary items, and with Zero's help, you defeat Oogie Boogie!\n"
+                  "Christmas is saved! Santa can finally make his deliveries, and all is merry in Halloween Town.\n"
+                  "You are the Pumpkin King!")
 
-
+# Call main game function to begin game
 main()
